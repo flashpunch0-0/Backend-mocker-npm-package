@@ -4,6 +4,7 @@ const router = express.Router();
 // const Book = require("../models/book");
 const Book = require("../models/book");
 const Counter = require("../models/counter");
+
 // Create
 router.post("/books/new", async (req, res) => {
   try {
@@ -38,6 +39,7 @@ router.post("/books/new", async (req, res) => {
   }
 });
 
+// get books
 // Read
 router.get("/books", async (req, res) => {
   try {
