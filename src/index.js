@@ -6,7 +6,8 @@ const bookRoutes = require("./routes/bookRoutes");
 const app = express();
 const port = 3000;
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 mongoose.connect("mongodb://localhost:27017/mockapi", {
   useNewUrlParser: true,

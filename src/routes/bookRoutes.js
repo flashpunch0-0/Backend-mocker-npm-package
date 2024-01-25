@@ -7,11 +7,26 @@ const Book = require("../models/book");
 // Create
 router.post("/books/new", async (req, res) => {
   try {
-    const book = new Model(req.body);
+    // console.log("Request Body:", req.body);
+    const { title, author, publishedDate } = req.body;
+    const formattedDate = new Date(publishedDate).toISOString().split("T")[0];
+    // console.log("Request Body:", req);
+    // const book = new Book(req.body);
+    const book = new Book({
+      title,
+      author,
+      publishedDate: formattedDate,
+    });
     await book.save();
+    // res.status(201).send(book);
+    // const responseBook = book.toObject();
+    // delete responseBook._id;
+
     res.status(201).send(book);
   } catch (error) {
     res.status(400).send(error);
+    console.error(error.message);
+    res.status(400).send(error.message);
   }
 });
 
