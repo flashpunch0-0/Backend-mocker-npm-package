@@ -5,7 +5,7 @@ const router = express.Router();
 const Book = require("../models/book");
 
 // Create
-router.post("/books", async (req, res) => {
+router.post("/books/new", async (req, res) => {
   try {
     const book = new Model(req.body);
     await book.save();
@@ -21,7 +21,8 @@ router.get("/books", async (req, res) => {
     const books = await Book.find();
     res.status(200).send(books);
   } catch (error) {
-    res.status(500).send(error);
+    console.error(error);
+    res.status(500).send({ error: "Internal Server Error" });
   }
 });
 
