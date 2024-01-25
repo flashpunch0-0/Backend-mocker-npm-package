@@ -1,7 +1,7 @@
 {
   "name": "backend-mocker-npm-package",
   "version": "1.0.0",
-  "description": "",
+  "description": "A package for mocking backend services , #easy crud backend",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
