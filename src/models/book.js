@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const bookSchema = new mongoose.Schema(
   {
+    _id: Number, //Mongoose uses the ObjectId type for the _id field so changed it
     title: String,
     author: String,
     publishedDate: Date,

@@ -3,19 +3,28 @@ const express = require("express");
 const router = express.Router();
 // const Book = require("../models/book");
 const Book = require("../models/book");
-
+const Counter = require("../models/counter");
 // Create
 router.post("/books/new", async (req, res) => {
   try {
     // console.log("Request Body:", req.body);
+    // autoincrement id in mongodb
+    const counter = await Counter.findOneAndUpdate(
+      { _id: "bookId" },
+      { $inc: { sequence_value: 1 } },
+      { new: true }
+    );
+    const nextBookId = counter.sequence_value;
+    //
     const { title, author, publishedDate } = req.body;
     const formattedDate = new Date(publishedDate).toISOString().split("T")[0];
     // console.log("Request Body:", req);
     // const book = new Book(req.body);
     const book = new Book({
+      _id: nextBookId, // Use the auto-incremented ID
       title,
       author,
-      publishedDate: formattedDate,
+      publishedDate,
     });
     await book.save();
     // res.status(201).send(book);
@@ -24,9 +33,8 @@ router.post("/books/new", async (req, res) => {
 
     res.status(201).send(book);
   } catch (error) {
-    res.status(400).send(error);
-    console.error(error.message);
-    res.status(400).send(error.message);
+    console.error(error);
+    res.status(400).json({ error: error.message || "Bad Request" });
   }
 });
 
