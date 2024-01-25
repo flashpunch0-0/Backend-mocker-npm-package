@@ -57,6 +57,10 @@ router.patch("/books/:id", async (req, res) => {
 router.delete("/books/:id", async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) {
+      return res.status(404).json({ error: "Book not found" });
+    }
+
     res.status(200).send(book);
   } catch (error) {
     res.status(500).send(error);
