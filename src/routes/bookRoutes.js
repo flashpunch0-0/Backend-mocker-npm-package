@@ -25,7 +25,7 @@ router.post("/books/new", async (req, res) => {
       _id: nextBookId, // Use the auto-incremented ID
       title,
       author,
-      publishedDate,
+      formattedDate,
     });
     await book.save();
     // res.status(201).send(book);
