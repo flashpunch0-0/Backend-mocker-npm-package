@@ -1,6 +1,4 @@
-Your README.md file should contain the following content:
 
-```
 # Backend Mocker NPM Package
 
 ## Description
@@ -11,7 +9,7 @@ Backend Mocker NPM Package is a simple and lightweight npm package for quickly s
 
 To install the package, simply run:
 
-```bash
+```bash, cmd , any terminal in a directory of your choice
 npm install backend-mocker-npm-package
 ```
 
