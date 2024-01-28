@@ -3,9 +3,13 @@ const express = require("express");
 const router = express.Router();
 // const Book = require("../models/book");
 const Book = require("../models/book");
+// const Book = require("../index");
 const Counter = require("../models/counter");
+// const backendMocker = require("backend");
 
 // Create
+// if routes dont work just uncomment the below code
+
 router.post("/books/new", async (req, res) => {
   try {
     // console.log("Request Body:", req.body);
@@ -25,7 +29,7 @@ router.post("/books/new", async (req, res) => {
       _id: nextBookId, // Use the auto-incremented ID
       title,
       author,
-      formattedDate,
+      publishedDate: formattedDate,
     });
     await book.save();
     // res.status(201).send(book);
@@ -38,6 +42,35 @@ router.post("/books/new", async (req, res) => {
     res.status(400).json({ error: error.message || "Bad Request" });
   }
 });
+
+//  below is from gpt latest26thjanuare
+// // module.exports = function (bookSchema) {
+// router.post("/books/new", async (req, res) => {
+//   try {
+//     // Assuming req.body contains data with headers matching your custom schema
+//     // const filledData = processRequestBody(req.body, bookSchema);
+
+//     // Create a new Book instance with the filled data dynamically
+//     const book = new backendMocker.Book(req.body);
+
+//     // Auto-increment book ID in MongoDB
+//     const counter = await Counter.findOneAndUpdate(
+//       { _id: "bookId" },
+//       { $inc: { sequence_value: 1 } },
+//       { new: true }
+//     );
+//     const nextBookId = counter.sequence_value;
+//     book._id = nextBookId; // Assuming _id is the field to be incremented
+
+//     // Save the new book to MongoDB
+//     await book.save();
+
+//     res.status(201).send(book);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(400).json({ error: error.message || "Bad Request" });
+//   }
+// });
 
 // get books
 // Read
@@ -76,5 +109,11 @@ router.delete("/books/:id", async (req, res) => {
     res.status(500).send(error);
   }
 });
+// };
 
 module.exports = router;
+
+// function processRequestBody(requestBody, customSchema) {
+//   // Assuming the headers in req.body match the field names in your custom schema
+//   return requestBody;
+// }
