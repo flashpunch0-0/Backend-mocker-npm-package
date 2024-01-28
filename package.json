@@ -1,6 +1,6 @@
 {
   "name": "backend-mocker-npm-package",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A package for mocking backend services , #easy crud backend",
   "main": "./src/index.js",
   "scripts": {
