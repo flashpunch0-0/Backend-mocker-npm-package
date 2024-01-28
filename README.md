@@ -1,7 +1,6 @@
-Certainly! Below is a template for your `README.md` file:
+Your README.md file should contain the following content:
 
----
-
+```
 # Backend Mocker NPM Package
 
 ## Description
@@ -52,23 +51,17 @@ The package provides the following endpoints:
 
 - **GET /books**: Retrieve all books.
 - **POST /books/new**: Create a new book.
-- {
-  "title": "The Great Gatsby",
-  "author": "F. Scott Fitzgerald",
-  "publishedDate": "1925-04-10"
-   }
+  - Test JSON post data:
+    ```json
+    {
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "publishedDate": "1925-04-10"
+    }
+    ```
 
 - **PATCH /books/:id**: Update a book by ID.
 - **DELETE /books/:id**: Delete a book by ID.
 
-## License
-
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please see the [CONTRIBUTING](CONTRIBUTING.md) file for more details.
-
----
-
-Feel free to customize this template according to your project's specific details and requirements!
+Contributing
+Contributions are welcome! Please contact me to if you have any idea which can make this project better.
