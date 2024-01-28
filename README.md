@@ -2,7 +2,7 @@
 
 # Welcome to Backend Mocker NPM Package 🚀
 
-![Backend Mocker]([https://imgur.com/gallery/wHluThx](https://imgur.com/gallery/wHluThx))
+![Backend Mocker](https://i.imgur.com/wHluThx.png)
 
 ## Unleash Your Creativity, Power Your Backend!
 
