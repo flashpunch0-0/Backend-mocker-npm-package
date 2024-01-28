@@ -5,7 +5,7 @@ const Counter = require("../models/counter");
 // Create a function to handle book routes with a parameter for the Book model
 const bookRoutes = (Book) => {
   // Create
-  router.post("/books/new", async (req, res) => {
+  router.post("/new", async (req, res) => {
     try {
       // Auto-increment ID
       const counter = await Counter.findOneAndUpdate(
@@ -28,7 +28,7 @@ const bookRoutes = (Book) => {
   });
 
   // Read
-  router.get("/books", async (req, res) => {
+  router.get("/get", async (req, res) => {
     try {
       const books = await Book.find();
       res.status(200).send(books);
@@ -39,7 +39,7 @@ const bookRoutes = (Book) => {
   });
 
   // Update
-  router.patch("/books/:id", async (req, res) => {
+  router.patch("/update/:id", async (req, res) => {
     try {
       const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
@@ -51,7 +51,7 @@ const bookRoutes = (Book) => {
   });
 
   // Delete
-  router.delete("/books/:id", async (req, res) => {
+  router.delete("/delete/:id", async (req, res) => {
     try {
       const book = await Book.findByIdAndDelete(req.params.id);
       if (!book) {
