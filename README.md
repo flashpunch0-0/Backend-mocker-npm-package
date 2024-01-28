@@ -52,11 +52,11 @@ The package provides the following endpoints:
 
 - **GET /books**: Retrieve all books.
 - **POST /books/new**: Create a new book.
--     -- {
+- {
   "title": "The Great Gatsby",
   "author": "F. Scott Fitzgerald",
   "publishedDate": "1925-04-10"
-}
+   }
 
 - **PATCH /books/:id**: Update a book by ID.
 - **DELETE /books/:id**: Delete a book by ID.
