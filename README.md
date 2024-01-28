@@ -3,7 +3,7 @@
 
 ## Description
 
-Backend Mocker NPM Package is a simple and lightweight npm package for quickly setting up a CRUD API with MongoDB using Express and Mongoose. It provides easy-to-use endpoints for creating, reading, updating, and deleting data in your MongoDB database.
+Backend Mocker NPM Package is a simple and lightweight npm package for quickly setting up a CRUD API for Book store with MongoDB using Express and Mongoose. It provides easy-to-use endpoints for creating, reading, updating, and deleting data in your MongoDB database.
 
 ## Installation
 
