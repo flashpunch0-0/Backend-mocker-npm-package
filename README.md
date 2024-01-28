@@ -25,23 +25,26 @@ npm install backend-mocker-npm-package
 ## Quick Setup in Seconds ⏱️
 
 ```javascript
-const BackendMocker = require("backend-mocker-npm-package");
+const Backendmocker = require("backend-mocker-npm-package");
+const mongoose = require("mongoose");
+const customSchema = new mongoose.Schema(
+  {
+    _id: { type: Number, required: true },
+    name: String,
+    RollNo: String,
+    Age: String,
+    Course: String,
+    Date: Date,
+    PhoneNo: Number,
+  },
+  {
+    versionKey: false, //disablethe __v field
+  }
+);
+const mongoConnectionString = "mongodb://localhost:27017/trialcompleted";
+const back = new Backendmocker(mongoConnectionString, customSchema);
+back.startServer();
 
-// Provide your MongoDB connection string
-const mongoConnectionString = "mongodb://localhost:27017/mydatabase";
-
-// Define your custom schema
-const customSchema = {
-  title: String,
-  author: String,
-  publishedDate: Date,
-};
-
-// Create an instance of BackendMocker with custom schema
-const backendMocker = new BackendMocker(mongoConnectionString, customSchema);
-
-// Start the server
-backendMocker.startServer();
 
 ```
 
