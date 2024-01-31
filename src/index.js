@@ -7,9 +7,9 @@ const bookRoutes = require("./routes/bookRoutes");
 const Counter = require("./models/counter");
 
 class backendMocker {
-  constructor(mongoConnectionString, customSchema) {
+  constructor(mongoConnectionString, customSchema, port = 3000) {
     this.app = express();
-    this.port = 3000;
+    this.port = port;
 
     // Use express.json() instead of bodyParser.json()
     this.app.use(express.json());

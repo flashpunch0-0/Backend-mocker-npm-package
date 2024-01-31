@@ -1,7 +1,9 @@
 ---
 
 # Welcome to Backend Mocker NPM Package 🚀
-# Package link NPM  -  https://www.npmjs.com/package/backend-mocker-npm-package
+
+# Package link NPM - https://www.npmjs.com/package/backend-mocker-npm-package
+
 ![Backend Mocker](https://i.imgur.com/wHluThx.png)
 
 ## Unleash Your Creativity, Power Your Backend!
@@ -15,6 +17,7 @@ Hey there, fellow developer! Are you tired of spending hours setting up your bac
 - **Automatic ID Generation**: Sit back and relax while we handle the IDs for you.
 - **Robust Error Handling**: Friendly error messages to guide you through the dark tunnels of debugging.
 - **Built-in Counters**: Counting made simple. Manage your data effortlessly.
+- **Custom Port**: create a custom port to run the backend on . && if not then the port will be automatically set to 3000
 
 ## Installation Made Easy 🛠️
 
@@ -23,6 +26,9 @@ npm install backend-mocker-npm-package
 ```
 
 ## Quick Setup in Seconds ⏱️
+
+after downloading package
+create a .js file
 
 ```javascript
 const Backendmocker = require("backend-mocker-npm-package");
@@ -41,11 +47,10 @@ const customSchema = new mongoose.Schema(
     versionKey: false, //disablethe __v field
   }
 );
-const mongoConnectionString = "mongodb://localhost:27017/trialcompleted";
-const back = new Backendmocker(mongoConnectionString, customSchema);
+const customPort = 4000;
+const mongoConnectionString = "your-mongodb-string";
+const back = new Backendmocker(mongoConnectionString, customSchema, customPort);
 back.startServer();
-
-
 ```
 
 ## API Endpoints 📡
@@ -55,10 +60,12 @@ back.startServer();
 - **PATCH /update/:id**: Update a data by ID.
 - **DELETE /delete/:id**: Delete a data by ID.
 
-## 💡 Custom Schema? No Problem!
+## 💡NO schema just want to test api for frontend!
+
+if no schema then the app will create a book schema like below
 
 ```javascript
-const customSchema = {
+const book = {
   title: String,
   author: String,
   publishedDate: Date,
@@ -78,7 +85,5 @@ What are you waiting for? Dive into the world of rapid backend development with 
 
 Have questions, ideas, or just want to chat? Reach out to us at kratikbohra5@gmail.com.
 **Contributions** are welcome! Please contact me to if you have any idea by which can make this project better.
-
-
 
 Feel the power, embrace the creativity, and revolutionize your backend development experience with Backend Mocker. Happy coding! 🎉
