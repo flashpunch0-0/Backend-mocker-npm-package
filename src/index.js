@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bookRoutes = require("./routes/bookRoutes");
 const Counter = require("./models/counter");
+const cors = require("cors");
 
 class backendMocker {
   constructor(mongoConnectionString, customSchema, port = 3000) {
@@ -13,7 +14,7 @@ class backendMocker {
 
     // Use express.json() instead of bodyParser.json()
     this.app.use(express.json());
-
+    this.app.use(cors());
     // Connect to MongoDB with the provided connection string
     mongoose.connect(mongoConnectionString, {
       useNewUrlParser: true,
