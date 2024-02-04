@@ -1,50 +1,70 @@
-//
-
 const express = require("express");
-// const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const { Client } = require("pg");
 const bookRoutes = require("./routes/bookRoutes");
+const bookRoutes2 = require("./routes/bookRoutes2");
 const Counter = require("./models/counter");
 const cors = require("cors");
-
+const { Sequelize, DataTypes } = require("sequelize");
 class backendMocker {
-  constructor(mongoConnectionString, customSchema, port = 3000) {
+  constructor(
+    mongoConnectionString,
+    postgresConnectionString,
+    customSchema,
+    tableName,
+    port = 3000
+  ) {
     this.app = express();
     this.port = port;
 
-    // Use express.json() instead of bodyParser.json()
     this.app.use(express.json());
     this.app.use(cors());
-    // Connect to MongoDB with the provided connection string
-    mongoose.connect(mongoConnectionString, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    mongoose.connection.once("open", () => {
-      console.log("Connected to MongoDB");
-    });
 
-    // Initialize counter
-    this.initializeCounter();
+    if (mongoConnectionString) {
+      // Connect to MongoDB
+      mongoose.connect(mongoConnectionString, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      mongoose.connection.once("open", () => {
+        console.log("Connected to MongoDB");
+      });
 
-    // Log requests to the console
+      // Initialize counter for MongoDB
+      this.initializeMongoCounter();
+
+      // Use MongoDB-specific book routes
+      const Book = customSchema
+        ? mongoose.model(tableName, customSchema)
+        : require("./models/book");
+      this.app.use(bookRoutes(Book));
+    } else if (postgresConnectionString) {
+      this.sequelize = new Sequelize(postgresConnectionString);
+      // this.Book = this.sequelize.define("Book", customSchema);
+      this.Book = this.sequelize.define(tableName, customSchema);
+      // Sync models with database
+      this.sequelize.sync();
+
+      this.app.use(bookRoutes2(this.Book));
+
+      // Use PostgreSQL-specific book routes
+      // this.app.use(bookRoutes2(this.client));
+    } else {
+      throw new Error("No valid database connection string provided");
+    }
+
+    // Log requests to the console  MIDDLEWARE
     this.app.use((req, res, next) => {
       console.log(`${req.method} ${req.url}`);
       next();
     });
-    const Book = customSchema
-      ? mongoose.model("Book", customSchema)
-      : require("./models/book");
-    // Use bookRoutes
-    this.app.use(bookRoutes(Book));
   }
 
-  initializeCounter() {
-    Counter.findOne({ _id: "bookId" }).then((counter) => {
-      if (!counter) {
-        return Counter.create({ _id: "bookId", sequence_value: 0 });
-      }
-    });
+  async initializeMongoCounter() {
+    const counter = await Counter.findOne({ _id: "bookId" });
+    if (!counter) {
+      await Counter.create({ _id: "bookId", sequence_value: 0 });
+    }
   }
 
   startServer() {

@@ -10,6 +10,12 @@
 
 Hey there, fellow developer! Are you tired of spending hours setting up your backend infrastructure every time you start a new project? Say hello to **Backend Mocker** - your ultimate companion for rapid backend development!
 
+🌟 Additional Features in Version 2.0:
+Support for PostgreSQL: Now you can choose between MongoDB and PostgreSQL for your backend database.
+Dynamic Table Name: Define your own table name for PostgreSQL schemas, giving you more flexibility in database management.
+Custom Port: Set a custom port to run your backend server on, providing greater control over your development environment.
+Improved Error Handling: Enhanced error messages to guide you through troubleshooting and debugging, ensuring a smoother development experience.
+
 ## 🌟 Features :
 
 - **Easy Setup**: Get your CRUD API up and running in the blink of an eye.
