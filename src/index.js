@@ -38,12 +38,6 @@ class backendMocker {
         : require("./models/book");
       this.app.use(bookRoutes(Book));
     } else if (postgresConnectionString) {
-      // Connect to PostgreSQL
-      // this.client = new Client({
-      //   connectionString: postgresConnectionString,
-      // });
-      // this.client.connect();
-
       this.sequelize = new Sequelize(postgresConnectionString);
       this.Book = this.sequelize.define("Book", customSchema);
       // Sync models with database
@@ -57,7 +51,7 @@ class backendMocker {
       throw new Error("No valid database connection string provided");
     }
 
-    // Log requests to the console
+    // Log requests to the console  MIDDLEWARE
     this.app.use((req, res, next) => {
       console.log(`${req.method} ${req.url}`);
       next();
