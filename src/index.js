@@ -11,6 +11,7 @@ class backendMocker {
     mongoConnectionString,
     postgresConnectionString,
     customSchema,
+    tableName,
     port = 3000
   ) {
     this.app = express();
@@ -34,12 +35,13 @@ class backendMocker {
 
       // Use MongoDB-specific book routes
       const Book = customSchema
-        ? mongoose.model("Book", customSchema)
+        ? mongoose.model(tableName, customSchema)
         : require("./models/book");
       this.app.use(bookRoutes(Book));
     } else if (postgresConnectionString) {
       this.sequelize = new Sequelize(postgresConnectionString);
-      this.Book = this.sequelize.define("Book", customSchema);
+      // this.Book = this.sequelize.define("Book", customSchema);
+      this.Book = this.sequelize.define(tableName, customSchema);
       // Sync models with database
       this.sequelize.sync();
 
