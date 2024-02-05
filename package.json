@@ -1,21 +1,21 @@
 {
   "name": "backend-mocker-npm-package",
-  "version": "2.0.0",
-  "description": "A package for mocking backend services , #easy custom schema  crud backend api",
+  "version": "2.0.1",
+  "description": "A package for rapid backend development, providing CRUD API generation with customizable schema support for MongoDB and PostgreSQL.",
   "main": "./src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "crud api mongodb ",
-    "backend-api",
+    "crud api",
     "backend",
     "mock",
     "api",
     "mongoose",
-    "express"
+    "express",
+    "postgresql"
   ],
-  "author": "",
+  "author": "Kratik Bohra <kratikbohra5@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
@@ -29,5 +29,9 @@
   "engines": {
     "node": ">=12.0.0",
     "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/flashpunch0-0/Backend-mocker-npm-package"
   }
 }
