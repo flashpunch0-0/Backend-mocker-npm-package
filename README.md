@@ -21,9 +21,11 @@ Hey there, fellow developer! Are you tired of spending hours setting up your bac
 - **Built-in Counters**: Counting made simple. Manage your data effortlessly.
 - **Custom Port**: Create a custom port to run the backend on. If not specified, the port will be automatically set to 3000.
 
-## Installation Made Easy 🛠️
+## Installation Made Easy 🛠️ 
+ Create a project directory and in that directory execute these below two commands in terminal
 
 ```bash
+npm init -y
 npm install backend-mocker-npm-package
 ```
 
@@ -41,21 +43,22 @@ const mongoose = require("mongoose");
 const tableName = "name-it-as-you-want";
 
 // Below is schema designed for mongodb
+// your customSchema variable should compulsorily contain the  line for it to implement autoincremented feature .
+// You can make changes in schema as you want (try googling or use chatgpt for help ).
+// Just make sure that _id  lin is always present in schema 
+ 
+  //_id: { type: Number, required: true },
 
-const customSchema = new mongoose.Schema(
-  {
-    _id: { type: Number, required: true },
-    name: String,
-    RollNo: String,
-    Age: String,
-    Course: String,
-    Date: Date,
-    PhoneNo: Number,
-  },
-  {
-    versionKey: false, //disablethe __v field
-  }
-);
+
+const customSchema = new mongoose.Schema({
+  _id: { type: Number, required: true },
+  name: String,
+  RollNo: String,
+  Age: String,
+  Course: String,
+  Date: Date,
+  PhoneNo: Number,
+});
 
 // set a custom port , optional
 const customPort = 4000;
@@ -130,7 +133,7 @@ const book = {
   author: String,
   publishedDate: Date,
 };
-this will be automatically created if you donot provide a schema
+// this will be automatically created if you donot provide a schema currently only supported for mongodb database
 ```
 
 With Backend Mocker, you're not just building a backend - you're unleashing your creativity and powering your projects to new heights!
