@@ -1,6 +1,6 @@
 {
   "name": "backend-mocker-npm-package",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "description": "A package for rapid backend development, providing CRUD API generation with customizable schema support for MongoDB and PostgreSQL.",
   "main": "./src/index.js",
   "scripts": {
