@@ -30,8 +30,21 @@ const bookRoutes = (Book) => {
   // Read
   router.get("/get", async (req, res) => {
     try {
-      const books = await Book.find();
-      res.status(200).send(books);
+      const data = await Book.find();
+      res.status(200).send(data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: "Internal Server Error" });
+    }
+  });
+  router.get("/get/:id", async (req, res) => {
+    try {
+      const row = await Book.findOne({ _id: req.params.id });
+      if (!row) {
+        return res.status(404).send({ error: "data not found" });
+      }
+
+      res.status(200).send(row);
     } catch (error) {
       console.error(error);
       res.status(500).send({ error: "Internal Server Error" });
@@ -41,10 +54,10 @@ const bookRoutes = (Book) => {
   // Update
   router.patch("/update/:id", async (req, res) => {
     try {
-      const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      const upd_row = await Book.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
       });
-      res.status(200).send(book);
+      res.status(200).send(upd_row);
     } catch (error) {
       res.status(400).send(error);
     }
@@ -53,12 +66,12 @@ const bookRoutes = (Book) => {
   // Delete
   router.delete("/delete/:id", async (req, res) => {
     try {
-      const book = await Book.findByIdAndDelete(req.params.id);
-      if (!book) {
-        return res.status(404).json({ error: "Book not found" });
+      const del_row = await Book.findByIdAndDelete(req.params.id);
+      if (!del_row) {
+        return res.status(404).json({ error: "data to delete  not found" });
       }
 
-      res.status(200).send(book);
+      res.status(200).send(del_row);
     } catch (error) {
       res.status(500).send(error);
     }
