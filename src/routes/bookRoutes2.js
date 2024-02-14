@@ -6,8 +6,8 @@ const bookRoutes2 = (Book) => {
   // Create
   router.post("/new", async (req, res) => {
     try {
-      const book = await Book.create(req.body);
-      res.status(201).send(book);
+      const newdata = await Book.create(req.body);
+      res.status(201).send(newdata);
     } catch (error) {
       console.error(error);
       res.status(400).json({ error: error.message || "Bad Request" });
@@ -17,8 +17,17 @@ const bookRoutes2 = (Book) => {
   // Read
   router.get("/get", async (req, res) => {
     try {
-      const books = await Book.findAll();
-      res.status(200).send(books);
+      const rows = await Book.findAll();
+      res.status(200).send(rows);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({ error: "Internal Server Error" });
+    }
+  });
+  router.get("/get/:id", async (req, res) => {
+    try {
+      const row = await Book.findByPk(req.params.id);
+      res.status(200).send(row);
     } catch (error) {
       console.error(error);
       res.status(500).send({ error: "Internal Server Error" });
@@ -34,7 +43,7 @@ const bookRoutes2 = (Book) => {
         returning: true,
       });
       if (numOfAffectedRows === 0) {
-        return res.status(404).json({ error: "Book not found" });
+        return res.status(404).json({ error: "data to update not found" });
       }
       res.status(200).send(updatedBook[0]);
     } catch (error) {
@@ -49,9 +58,9 @@ const bookRoutes2 = (Book) => {
       const { id } = req.params;
       const numOfDeletedRows = await Book.destroy({ where: { id } });
       if (numOfDeletedRows === 0) {
-        return res.status(404).json({ error: "Book not found" });
+        return res.status(404).json({ error: "data to delete not found" });
       }
-      res.status(200).json({ message: "Book deleted successfully" });
+      res.status(200).json({ message: "data  deleted successfully" });
     } catch (error) {
       console.error(error);
       res.status(500).send(error);
